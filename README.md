@@ -37,7 +37,7 @@ The accuracy on ImageNet can be significantly improved using more complex traini
 | Network | test crop: 224×224 | test crop: 320×320 | |
 | :----- | :-----: | :-----: |:-----: |
 PyConvResNet-50 (+augment) |  79.44 | 80.59| ([model](https://drive.google.com/uc?export=download&id=19RFyaDnJ34IeqwS8QOX29JWH9I0r_ewM))|
-PyConvResNet-100 (+augment) |  80.58 | 81.49| ([model](https://drive.google.com/uc?export=download&id=12PXOwgIF4eiApxDL5QrAMnjbiX69YQOi))|
+PyConvResNet-101 (+augment) |  80.58 | 81.49| ([model](https://drive.google.com/uc?export=download&id=12PXOwgIF4eiApxDL5QrAMnjbiX69YQOi))|
 
 
 ### Requirements
