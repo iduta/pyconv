@@ -1,11 +1,11 @@
 ## Pyramidal Convolution
 
-This is a PyTorch implementation of ["Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition"]() paper:
+This is a PyTorch implementation of ["Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition"](https://arxiv.org/pdf/2006.11538.pdf) paper:
 ```
 @article{duta2020pyramidal,
   author  = {Ionut Cosmin Duta and Li Liu and Fan Zhu and Ling Shao},
   title   = {Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition},
-  journal = {arXiv preprint},
+  journal = {arXiv preprint arXiv:2006.11538},
   year    = {2020},
 }
 ```
