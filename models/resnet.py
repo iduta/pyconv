@@ -19,10 +19,9 @@ __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
 model_urls = {
     'resnet18': 'Trained model not available yet!!',
     'resnet34': 'Trained model not available yet!!',
-    'resnet50': 'https://drive.google.com/uc?export=download&id=1yqp8Z6qp03ZKToACTJHLtynDBUToRLrU',
-    'resnet101': 'https://drive.google.com/uc?export=download&id=13_OnBf7qJnFFBMrDZXdox7kmhMmxCXAG',
-    'resnet152': 'https://drive.google.com/uc?export=download&id=1BsYmoAVJxumH4yWKH-DcJ_YDk__3ArQT',
-    'resnet200': 'https://drive.google.com/uc?export=download&id=1n4turCIswvNdWoRq2imZn1Ump-2giwKa',
+    'resnet50': 'https://drive.google.com/uc?export=download&id=176TS0b6O0NALBbfzpz4mM1b47s4dwSVH',
+    'resnet101': 'https://drive.google.com/uc?export=download&id=1bermctRPLs5DIsHB0c4iDIGHvjfERPLG',
+    'resnet152': 'https://drive.google.com/uc?export=download&id=1FAggTH4m7Kec8MyRe8dx-ugI_yh-nLzL',
 }
 
 
@@ -263,20 +262,6 @@ def resnet152(pretrained=False, **kwargs):
     if pretrained:
         os.makedirs(default_cache_path, exist_ok=True)
         model.load_state_dict(torch.load(download_from_url(model_urls['resnet152'],
-                                                           root=default_cache_path)))
-    return model
-
-
-def resnet200(pretrained=False, **kwargs):
-    """Constructs a ResNet-152 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(Bottleneck, [3, 24, 36, 3], **kwargs)
-    if pretrained:
-        os.makedirs(default_cache_path, exist_ok=True)
-        model.load_state_dict(torch.load(download_from_url(model_urls['resnet200'],
                                                            root=default_cache_path)))
     return model
 
