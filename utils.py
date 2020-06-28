@@ -7,7 +7,7 @@ class Logger(object):
         self.log_file = open(path, mode=mode)
         self.logger = csv.writer(self.log_file, delimiter='\t')
 
-        if mode is not 'a':
+        if mode != 'a':
             self.logger.writerow(header)
 
         self.header = header
