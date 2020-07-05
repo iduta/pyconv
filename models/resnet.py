@@ -12,8 +12,7 @@ except ImportError:
             os.getenv('XDG_CACHE_HOME', '~/.cache'), 'torch')))
 default_cache_path = os.path.join(torch_cache_home, 'pretrained')
 
-__all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
-           'resnet152', 'resnet200']
+__all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152']
 
 
 model_urls = {
@@ -264,4 +263,3 @@ def resnet152(pretrained=False, **kwargs):
         model.load_state_dict(torch.load(download_from_url(model_urls['resnet152'],
                                                            root=default_cache_path)))
     return model
-

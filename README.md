@@ -1,16 +1,10 @@
 ## Pyramidal Convolution
 
-![Pyramidal Convolution: PyConv](div/pyconv.jpg)
 
-This is a PyTorch implementation of ["Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition"](https://arxiv.org/pdf/2006.11538.pdf) paper:
-```
-@article{duta2020pyramidal,
-  author  = {Ionut Cosmin Duta and Li Liu and Fan Zhu and Ling Shao},
-  title   = {Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition},
-  journal = {arXiv preprint arXiv:2006.11538},
-  year    = {2020},
-}
-```
+This is the PyTorch implementation of our paper ["Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition"](https://arxiv.org/pdf/2006.11538.pdf).
+(Note that this is the code for image recognition on ImageNet. For semantic image segmentation/parsing refer to this repository: https://github.com/iduta/pyconvsegnet)
+
+![Pyramidal Convolution: PyConv](div/pyconv.jpg)
 
 The models trained on ImageNet can be found [here](https://drive.google.com/drive/folders/1DGTXansI_JbxJsS0cQzvfrLEVdJ6l8Oh?usp=sharing).
 
@@ -64,3 +58,14 @@ python main.py \
 To train using Multi-processing Distributed Data Parallel Training follow the instructions in the 
 [official PyTorch ImageNet training code](https://github.com/pytorch/examples/tree/master/imagenet).
 
+
+### Citation
+If you find our work useful, please consider citing:
+```
+@article{duta2020pyramidal,
+  author  = {Ionut Cosmin Duta and Li Liu and Fan Zhu and Ling Shao},
+  title   = {Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition},
+  journal = {arXiv preprint arXiv:2006.11538},
+  year    = {2020},
+}
+```

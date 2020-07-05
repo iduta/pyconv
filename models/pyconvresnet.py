@@ -1,3 +1,7 @@
+""" PyConv networks for image recognition as presented in our paper:
+    Duta et al. "Pyramidal Convolution: Rethinking Convolutional Neural Networks for Visual Recognition"
+    https://arxiv.org/pdf/2006.11538.pdf
+"""
 import torch
 import torch.nn as nn
 import os
@@ -36,7 +40,12 @@ class PyConv2d(nn.Module):
 
     Example::
 
-        >>> # With three pyramid levels, kernels: 3x3, 5x5, 7x7
+        >>> # PyConv with two pyramid levels, kernels: 3x3, 5x5
+        >>> m = PyConv2d(in_channels=64, out_channels=[32, 32], pyconv_kernels=[3, 5], pyconv_groups=[1, 4])
+        >>> input = torch.randn(4, 64, 56, 56)
+        >>> output = m(input)
+
+        >>> # PyConv with three pyramid levels, kernels: 3x3, 5x5, 7x7
         >>> m = PyConv2d(in_channels=64, out_channels=[16, 16, 32], pyconv_kernels=[3, 5, 7], pyconv_groups=[1, 4, 8])
         >>> input = torch.randn(4, 64, 56, 56)
         >>> output = m(input)
