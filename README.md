@@ -25,7 +25,7 @@ The accuracy on ImageNet (using the default training settings):
 
 
 
-The accuracy on ImageNet can be significantly improved using more complex training settings (for instance, using additional data augmentation (CutMix), increase bach size to 1024, learning rate of 0.4, 300 epochs and use mixed precision to speed-up training):
+The accuracy on ImageNet can be significantly improved using more complex training settings (for instance, using additional data augmentation (CutMix), increase bach size to 1024, learning rate of 0.4, cosine scheduler over 300 epochs and use mixed precision to speed-up training):
 
 
 | Network | test crop: 224×224 | test crop: 320×320 | |
