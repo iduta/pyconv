@@ -16,7 +16,7 @@ except ImportError:
             os.getenv('XDG_CACHE_HOME', '~/.cache'), 'torch')))
 default_cache_path = os.path.join(torch_cache_home, 'pretrained')
 
-__all__ = ['PyConvResNet', 'pyconvresnet50', 'pyconvresnet101', 'pyconvresnet152']
+__all__ = ['PyConvResNet', 'pyconvresnet18', 'pyconvresnet34', 'pyconvresnet50', 'pyconvresnet101', 'pyconvresnet152']
 
 
 model_urls = {
@@ -179,6 +179,79 @@ class PyConvBlock(nn.Module):
         return out
 
 
+class PyConvBasicBlock1(nn.Module):
+    expansion = 1
+
+    def __init__(self, inplanes, planes, stride=1, downsample=None, norm_layer=None, pyconv_groups=1, pyconv_kernels=1):
+        super(PyConvBasicBlock1, self).__init__()
+        if norm_layer is None:
+            norm_layer = nn.BatchNorm2d
+        # Both self.conv1 and self.downsample layers downsample the input when stride != 1
+        self.conv1 = get_pyconv(inplanes, planes, pyconv_kernels=pyconv_kernels, stride=stride,
+                                pyconv_groups=pyconv_groups)
+        self.bn1 = norm_layer(planes)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = get_pyconv(planes, planes, pyconv_kernels=pyconv_kernels, stride=1,
+                                pyconv_groups=pyconv_groups)
+        self.bn2 = norm_layer(planes)
+        self.downsample = downsample
+        self.stride = stride
+
+    def forward(self, x):
+        identity = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+
+        if self.downsample is not None:
+            identity = self.downsample(x)
+
+        out += identity
+        out = self.relu(out)
+
+        return out
+
+
+class PyConvBasicBlock2(nn.Module):
+    expansion = 1
+
+    def __init__(self, inplanes, planes, stride=1, downsample=None, norm_layer=None, pyconv_groups=1, pyconv_kernels=1):
+        super(PyConvBasicBlock2, self).__init__()
+        if norm_layer is None:
+            norm_layer = nn.BatchNorm2d
+        # Both self.conv1 and self.downsample layers downsample the input when stride != 1
+        self.conv1 = get_pyconv(inplanes, planes, pyconv_kernels=pyconv_kernels, stride=stride,
+                                pyconv_groups=pyconv_groups)
+        self.bn1 = norm_layer(planes)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = conv1x1(planes, planes * self.expansion)
+        self.bn2 = norm_layer(planes)
+        self.downsample = downsample
+        self.stride = stride
+
+    def forward(self, x):
+        identity = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+
+        if self.downsample is not None:
+            identity = self.downsample(x)
+
+        out += identity
+        out = self.relu(out)
+
+        return out
+
+
 class PyConvResNet(nn.Module):
 
     def __init__(self, block, layers, num_classes=1000, zero_init_residual=False, norm_layer=None, dropout_prob0=0.0):
@@ -272,6 +345,34 @@ class PyConvResNet(nn.Module):
         x = self.fc(x)
 
         return x
+
+
+def pyconvresnet18(pretrained=False, **kwargs):
+    """Constructs a PyConvResNet-18 model.
+
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+    """
+    #model = PyConvResNet(PyConvBasicBlock1, [2, 2, 2, 2], **kwargs) #params=11.21M GFLOPs 1.55
+    model = PyConvResNet(PyConvBasicBlock2, [2, 2, 2, 2], **kwargs)  #params=5.91M GFLOPs 0.88
+    if pretrained:
+        raise NotImplementedError("Not available the pretrained model yet!")
+
+    return model
+
+
+def pyconvresnet34(pretrained=False, **kwargs):
+    """Constructs a PyConvResNet-34 model.
+
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+    """
+    #model = PyConvResNet(PyConvBasicBlock1, [3, 4, 6, 3], **kwargs) #params=20.44M GFLOPs 3.09
+    model = PyConvResNet(PyConvBasicBlock2, [3, 4, 6, 3], **kwargs)  #params=11.09M GFLOPs 1.75
+    if pretrained:
+        raise NotImplementedError("Not available the pretrained model yet!")
+
+    return model
 
 
 def pyconvresnet50(pretrained=False, **kwargs):
