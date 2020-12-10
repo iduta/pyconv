@@ -54,7 +54,7 @@ parser.add_argument('--multiprocessing-distributed', action='store_true',
                          'multi node data parallel training')
 parser.add_argument('--n_classes', default=1000, type=int,
                     help='Number of classes. (default 1000) ')
-parser.add_argument('--lr_scheduler', default=None, type=str,
+parser.add_argument('--lr_scheduler', default='MultiStepLR', type=str,
                     help='The learning rate scheduler. Options: MultiStepLR')
 parser.add_argument('--lr_steps', default=[30, 60, 80], type=int, nargs="+",
                         metavar='LRSteps', help='epochs to decay learning rate by 10')
